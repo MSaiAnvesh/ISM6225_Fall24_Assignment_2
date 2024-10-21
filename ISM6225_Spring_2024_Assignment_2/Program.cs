@@ -63,7 +63,26 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new List<int>(); // Placeholder
+                    // Using the input array to mark visited numbers by negating their corresponding indices
+                List<int> result = new List<int>();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int index = Math.Abs(nums[i]) - 1;
+                    if (nums[index] > 0)
+                    {
+                        nums[index] = -nums[index];
+                    }
+                }
+
+                // Adding the index of positive numbers as missing numbers
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    if (nums[i] > 0)
+                    {
+                        result.Add(i + 1);
+                    }
+                }
+                return result;  // Placeholder
             }
             catch (Exception)
             {
@@ -77,7 +96,23 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                // Creating an array with even numbers at the start and odd numbers at the end
+                int[] result = new int[nums.Length];
+                int evenIndex = 0;
+                int oddIndex = nums.Length - 1;
+
+                foreach (int num in nums)
+                {
+                    if (num % 2 == 0)
+                    {
+                        result[evenIndex++] = num;
+                    }
+                    else
+                    {
+                        result[oddIndex--] = num;
+                    }
+                }
+                return result; // Placeholder
             }
             catch (Exception)
             {
@@ -91,6 +126,17 @@ namespace Assignment_2
             try
             {
                 // Write your code here
+                // Using a dictionary to store the complement and its index
+                Dictionary<int, int> map = new Dictionary<int, int>();
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int complement = target - nums[i];
+                    if (map.ContainsKey(complement))
+                    {
+                        return new int[] { map[complement], i };
+                    }
+                    map[nums[i]] = i;
+                }
                 return new int[0]; // Placeholder
             }
             catch (Exception)
@@ -105,7 +151,11 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                // Sorting the array to find the maximum product of either the largest three numbers
+                // or two smallest negative numbers with the largest positive number
+                Array.Sort(nums);
+                int n = nums.Length;
+                return Math.Max(nums[n - 1] * nums[n - 2] * nums[n - 3], nums[0] * nums[1] * nums[n - 1]);// Placeholder
             }
             catch (Exception)
             {
@@ -119,7 +169,14 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return "101010"; // Placeholder
+                // Converting decimal number to binary using modulus and division by 2
+                string result = "";
+                while (decimalNumber > 0)
+                {
+                    result = (decimalNumber % 2) + result;
+                    decimalNumber /= 2;
+                }
+                return result == "" ? "0" : result;// Placeholder
             }
             catch (Exception)
             {
@@ -133,7 +190,21 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                // Binary search to find the minimum in the rotated sorted array
+                int left = 0, right = nums.Length - 1;
+                while (left < right)
+                {
+                    int mid = (left + right) / 2;
+                    if (nums[mid] > nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid;
+                    }
+                }
+                return nums[left]; // Placeholder
             }
             catch (Exception)
             {
@@ -147,7 +218,24 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return false; // Placeholder
+                // Checking if the number is negative or if it ends with 0 but is not zero
+                if (x < 0 || (x % 10 == 0 && x != 0))
+                {
+                    return false;
+                }
+
+                int reversed = 0;
+                int original = x;
+
+                // Reversing the number to check for palindrome
+                while (x > 0)
+                {
+                    int pop = x % 10;
+                    reversed = reversed * 10 + pop;
+                    x /= 10;
+                }
+
+                return original == reversed; // Placeholder
             }
             catch (Exception)
             {
@@ -161,7 +249,16 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                // Iterative approach to calculate Fibonacci numbers
+                if (n <= 1) return n;
+                int a = 0, b = 1;
+                for (int i = 2; i <= n; i++)
+                {
+                    int temp = a + b;
+                    a = b;
+                    b = temp;
+                }
+                return b; // Placeholder
             }
             catch (Exception)
             {
